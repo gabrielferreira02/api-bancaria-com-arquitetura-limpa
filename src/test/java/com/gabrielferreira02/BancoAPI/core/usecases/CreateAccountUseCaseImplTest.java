@@ -58,12 +58,7 @@ class CreateAccountUseCaseImplTest {
                 "1234");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            Account account = new Account(
-                    command.firstName(),
-                    command.lastName(),
-                    command.password(),
-                    command.cpf()
-            );
+            createAccountUseCase.execute(command);
         });
     }
 
@@ -77,12 +72,7 @@ class CreateAccountUseCaseImplTest {
                 "1234");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            Account account = new Account(
-                    command.firstName(),
-                    command.lastName(),
-                    command.password(),
-                    command.cpf()
-            );
+            createAccountUseCase.execute(command);
         });
     }
 
@@ -96,12 +86,7 @@ class CreateAccountUseCaseImplTest {
                 "1234");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            Account account = new Account(
-                    command.firstName(),
-                    command.lastName(),
-                    command.password(),
-                    command.cpf()
-            );
+            createAccountUseCase.execute(command);
         });
     }
 
@@ -115,12 +100,7 @@ class CreateAccountUseCaseImplTest {
                 "12345");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            Account account = new Account(
-                    command.firstName(),
-                    command.lastName(),
-                    command.password(),
-                    command.cpf()
-            );
+            createAccountUseCase.execute(command);
         });
     }
 }
