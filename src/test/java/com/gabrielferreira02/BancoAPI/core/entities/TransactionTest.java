@@ -29,6 +29,19 @@ class TransactionTest {
         }
 
         @Test
+        @DisplayName("Should fail creating transaction with same sender and receiver id")
+        void shouldFailCreatingTransactionWithSameSenderAndReceiverId() {
+            UUID id = UUID.randomUUID();
+            assertThrows(IllegalArgumentException.class, () -> {
+                Transaction transaction = new Transaction(
+                        BigDecimal.valueOf(100),
+                        id,
+                        id
+                );
+            });
+        }
+
+        @Test
         @DisplayName("Should fail on create transaction because amount is less than or equal to 0")
         void shouldFailOnCreateTransactionBecauseAmountIsInvalid() {
             UUID sender = UUID.randomUUID();
