@@ -15,6 +15,7 @@ public class Transaction {
         if(amount.compareTo(BigDecimal.ZERO) <= 0) throw new IllegalArgumentException("Valor da transferência tem que ser maior que 0");
         if(receiver == null) throw new IllegalArgumentException("Destinatário inválido");
         if(sender == null) throw new IllegalArgumentException("Emissor inválido");
+        if(receiver == sender) throw new IllegalArgumentException("Não é possível enviar para si mesmo");
 
         this.amount = amount;
         this.receiver = receiver;
