@@ -33,8 +33,8 @@ public class CreateTransactionUseCaseImpl implements CreateTransactionUseCase {
 
         Transaction newTransaction = new Transaction(
                 command.amount(),
-                receiver.getId(),
-                sender.getId()
+                command.receiverId(),
+                command.senderId()
         );
 
         return transactionGateway.createTransaction(newTransaction);
