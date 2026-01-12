@@ -20,9 +20,9 @@ public class CreateTransactionUseCaseImpl implements CreateTransactionUseCase {
     public Transaction execute(CreateTransactionCommand command) {
         if(command == null) throw new IllegalArgumentException("Transação inexistente");
 
-        Account sender = accountGateway.getAccountById(command.senderId());
+        Account sender = accountGateway.findByIdForUpdate(command.senderId());
         if(sender == null) throw new IllegalArgumentException("Conta do emissor não encontrada");
-        Account receiver = accountGateway.getAccountById(command.receiverId());
+        Account receiver = accountGateway.findByIdForUpdate(command.receiverId());
         if(receiver == null) throw new IllegalArgumentException("Conta do destinatário não encontrada");
 
         sender.debit(command.amount());
