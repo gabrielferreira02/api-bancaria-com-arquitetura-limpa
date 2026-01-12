@@ -9,5 +9,6 @@ public interface AccountGateway {
     Account createAccount(Account account);
     Account updateAccount(Account account);
     Account getAccountById(UUID accountId);
+    Account findByIdForUpdate(UUID accountId);
     Account updateAccountPassword(Account account);
 }
