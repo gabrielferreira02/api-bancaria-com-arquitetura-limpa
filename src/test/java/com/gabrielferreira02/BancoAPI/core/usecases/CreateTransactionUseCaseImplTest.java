@@ -38,8 +38,8 @@ class CreateTransactionUseCaseImplTest {
         Account receiver = new Account("receiver", "last name", "1234", "12345678901");
         Transaction transaction = new Transaction(command.amount(), command.receiverId(), command.senderId());
 
-        when(accountGateway.getAccountById(command.senderId())).thenReturn(sender);
-        when(accountGateway.getAccountById(command.receiverId())).thenReturn(receiver);
+        when(accountGateway.findByIdForUpdate(command.senderId())).thenReturn(sender);
+        when(accountGateway.findByIdForUpdate(command.receiverId())).thenReturn(receiver);
         when(transactionGateway.createTransaction(any(Transaction.class))).thenReturn(transaction);
 
         Transaction response = createTransactionUseCase.execute(command);
@@ -66,8 +66,8 @@ class CreateTransactionUseCaseImplTest {
         Account receiver = new Account("receiver", "last name", "1234", "12345678901");
         Transaction transaction = new Transaction(command.amount(), command.receiverId(), command.senderId());
 
-        when(accountGateway.getAccountById(command.senderId())).thenReturn(sender);
-        when(accountGateway.getAccountById(command.receiverId())).thenReturn(receiver);
+        when(accountGateway.findByIdForUpdate(command.senderId())).thenReturn(sender);
+        when(accountGateway.findByIdForUpdate(command.receiverId())).thenReturn(receiver);
 
         assertThrows(IllegalArgumentException.class, () -> {
             createTransactionUseCase.execute(command);
@@ -81,8 +81,8 @@ class CreateTransactionUseCaseImplTest {
         Account sender = new Account("sender", "last name", "1234", "12345678901");
         sender.credit(BigDecimal.valueOf(110));
 
-        when(accountGateway.getAccountById(command.senderId())).thenReturn(sender);
-        when(accountGateway.getAccountById(command.receiverId())).thenReturn(null);
+        when(accountGateway.findByIdForUpdate(command.senderId())).thenReturn(sender);
+        when(accountGateway.findByIdForUpdate(command.receiverId())).thenReturn(null);
         assertThrows(IllegalArgumentException.class, () -> {
             createTransactionUseCase.execute(command);
         });
@@ -93,7 +93,7 @@ class CreateTransactionUseCaseImplTest {
     void shouldFailCreatingTransactionWithInvalidSenderId() {
         CreateTransactionCommand command = new CreateTransactionCommand(UUID.randomUUID(), UUID.randomUUID(), BigDecimal.valueOf(110));
 
-        when(accountGateway.getAccountById(command.senderId())).thenReturn(null);
+        when(accountGateway.findByIdForUpdate(command.senderId())).thenReturn(null);
 
         assertThrows(IllegalArgumentException.class, () -> {
             createTransactionUseCase.execute(command);
